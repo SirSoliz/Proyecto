@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barber Boss</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header class="bg-dark text-white text-center p-3">
+        <h1>Barber Boss</h1>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="#home">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Acerca</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#gallery">Galería</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#location">Ubicación</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="container text-center my-5 pt-5">
+        <h2>Bienvenido a Barber Boss</h2>
+        <p>El mejor estilo para tu cabello y barba con atención profesional.</p>
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="img1.jpg" class="d-block w-100" loading="lazy" alt="Imagen 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="img2.jpg" class="d-block w-100" loading="lazy" alt="Imagen 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="img3.jpg" class="d-block w-100" loading="lazy" alt="Imagen 3">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </section>
+
+    <section id="about" class="container my-5 text-center">
+        <h2>Acerca de Nosotros</h2>
+        <p>Somos una barbería con años de experiencia, brindando cortes y afeitados de calidad.</p>
+    </section>
+
+    <section id="services" class="container my-5 text-center">
+        <h2>Nuestros Servicios</h2>
+        <ul class="list-group">
+            <li class="list-group-item">Cortes de cabello modernos</li>
+            <li class="list-group-item">Afeitado clásico</li>
+            <li class="list-group-item">Arreglo de barba</li>
+            <li class="list-group-item">Tratamientos capilares</li>
+        </ul>
+    </section>
+
+    <section id="gallery" class="container my-5">
+        <h2 class="text-center">Galería</h2>
+        <div class="row" id="gallery-content"></div>
+    </section>
+
+    <section id="contact" class="container my-5">
+        <h2 class="text-center">Contacto</h2>
+        <form id="contactForm" class="row g-3">
+            <div class="col-md-6">
+                <input type="email" id="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="col-md-6">
+                <input type="text" id="name" class="form-control" placeholder="Nombre completo" required>
+            </div>
+            <div class="col-md-6">
+                <input type="date" id="dob" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <input type="number" id="income" class="form-control" placeholder="Rango de ingreso">
+            </div>
+            <div class="col-md-6">
+                <select id="gender" class="form-select">
+                    <option>Masculino</option>
+                    <option>Femenino</option>
+                    <option>Otro</option>
+                </select>
+            </div>
+            <input type="hidden" id="age">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </section>
+
+    <section id="location" class="container my-5">
+        <h2 class="text-center">Ubicación</h2>
+        <div id="map" style="height: 400px;"></div>
+    </section>
+
+    <footer class="bg-dark text-white text-center p-3">
+        <p>&copy; 2025 Barber Boss. Todos los derechos reservados.</p>
+        <div>
+            <a href="#" class="text-white mx-2">Facebook</a>
+            <a href="#" class="text-white mx-2">Instagram</a>
+            <a href="#" class="text-white mx-2">WhatsApp</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
