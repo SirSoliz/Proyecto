@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Barber Boss</title>
+    <link rel="stylesheet" href="../styles/login-style.css" />
+    <link rel="stylesheet" href="../css/login-messages.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
+    <img src="../Images/Login images/blob.svg" class="blob" />
+    <div class="orbit"></div>
+    <div class="login">
+      <img src="../Images/Login images/logo.png" />
+      <h2>Create Account</h2>
+      <h3>Join Barber Boss today!</h3>
+      <form class="form" id="registerForm">
+        <div class="textbox">
+          <input required type="text" id="fullName" />
+          <label>Full Name</label>
+        </div>
+        <div class="textbox">
+          <input required type="email" id="email" />
+          <label>Email</label>
+        </div>
+        <div class="textbox">
+          <input required type="password" id="password" minlength="8"/>
+          <label>Password</label>
+        </div>
+        <div class="textbox">
+          <input required type="password" id="confirmPassword" minlength="8"/>
+          <label>Confirm Password</label>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+      <p class="footer">Already have an account? <a href="../login.html">Login!</a></p>
+    </div>
+    <script src="../js/register.js"></script>
+  </body>
+</html>
