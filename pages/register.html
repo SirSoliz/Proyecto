@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register - Barber Boss</title>
+    <title>Registro de Usuario - Barber Boss</title>
+    <!-- Estilos CSS para el formulario de registro -->
     <link rel="stylesheet" href="../styles/login-style.css" />
     <link rel="stylesheet" href="../css/login-messages.css" />
+    <!-- Fuentes de Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,33 +21,41 @@
     />
   </head>
   <body>
-    <img src="../Images/Login images/blob.svg" class="blob" />
+    <!-- Elementos decorativos -->
+    <img src="../Images/Login images/blob.svg" class="blob" alt="Forma decorativa" />
     <div class="orbit"></div>
+    
+    <!-- Formulario de registro -->
     <div class="login">
-      <img src="../Images/Login images/logo.png" />
-      <h2>Create Account</h2>
-      <h3>Join Barber Boss today!</h3>
+      <img src="../Images/Login images/logo.png" alt="Logo de Barber Boss" />
+      <h2>Crear Cuenta</h2>
+      <h3>¡Únete a Barber Boss hoy!</h3>
       <form class="form" id="registerForm">
+        <!-- Campo: Nombre completo -->
         <div class="textbox">
           <input required type="text" id="fullName" />
-          <label>Full Name</label>
+          <label>Nombre Completo</label>
         </div>
+        <!-- Campo: Correo electrónico -->
         <div class="textbox">
           <input required type="email" id="email" />
-          <label>Email</label>
+          <label>Correo Electrónico</label>
         </div>
+        <!-- Campo: Contraseña -->
         <div class="textbox">
           <input required type="password" id="password" minlength="8"/>
-          <label>Password</label>
+          <label>Contraseña</label>
         </div>
+        <!-- Campo: Confirmar contraseña -->
         <div class="textbox">
           <input required type="password" id="confirmPassword" minlength="8"/>
-          <label>Confirm Password</label>
+          <label>Confirmar Contraseña</label>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit">Registrarse</button>
       </form>
-      <p class="footer">Already have an account? <a href="../login.html">Login!</a></p>
+      <p class="footer">¿Ya tienes una cuenta? <a href="../login.html">¡Inicia sesión!</a></p>
     </div>
+    <!-- Script de funcionalidad del registro -->
     <script src="../js/register.js"></script>
   </body>
 </html>

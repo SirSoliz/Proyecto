@@ -13,88 +13,115 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = passwordInput.value.trim();
         const confirmPassword = confirmPasswordInput.value.trim();
 
-        // Validation
+        // Validación de campos
         if (!fullName || !email || !password || !confirmPassword) {
-            showError('Please fill in all fields');
+            showError('Por favor, complete todos los campos');
             return;
         }
 
         if (!isValidEmail(email)) {
-            showError('Please enter a valid email address');
+            showError('Por favor, ingrese una dirección de correo electrónico válida');
             return;
         }
 
         if (password.length < 8) {
-            showError('Password must be at least 8 characters long');
+            showError('La contraseña debe tener al menos 8 caracteres');
             return;
         }
 
         if (password !== confirmPassword) {
-            showError('Passwords do not match');
+            showError('Las contraseñas no coinciden');
             return;
         }
 
-        // In a real application, this would send the data to a server
-        // For now, we'll simulate a successful registration
+        // NOTA: En una aplicación real, esto se enviaría a un servidor backend
+        // Por ahora, solo simulamos el registro para el proyecto de la U
         const newUser = {
             fullName,
             email,
             password
         };
 
-        // Store user in localStorage (for demo purposes only)
-        // In a real app, this would be handled by a server
+        // Guardamos el usuario en localStorage (solo para demostración)
+        // IMPORTANTE: En una app real, esto lo manejaría un servidor por seguridad
+        // Obtenemos la lista de usuarios o creamos un array vacío si no existe
         const users = JSON.parse(localStorage.getItem('users') || '[]');
         
-        // Check if email already exists
+        // Verificamos si el correo ya está registrado
+        // Usamos .some() para buscar si existe algún usuario con ese email
         if (users.some(user => user.email === email)) {
-            showError('Email already registered');
+            showError('El correo ya está registrado');
             return;
         }
 
+        // Agregamos el nuevo usuario a la lista
         users.push(newUser);
+        // Actualizamos el localStorage con la lista actualizada
         localStorage.setItem('users', JSON.stringify(users));
 
-        // Show success message and redirect
-        showSuccess('Registration successful! Redirecting to login...');
+        // Mostramos mensaje de éxito y redirigimos al login
+        // setTimeout nos da tiempo para que el usuario vea el mensaje
+        showSuccess('¡Registro exitoso! Redirigiendo al login...');
         setTimeout(() => {
             window.location.href = '../login.html';
-        }, 2000);
+        }, 2000); // Esperamos 2 segundos antes de redireccionar
     });
 });
 
+/**
+ * Función que valida el formato de un correo electrónico
+ * @param {string} email - El correo electrónico a validar
+ * @returns {boolean} - true si el formato es válido, false si no
+ */
 function isValidEmail(email) {
+    // Expresión regular para validar email
+    // Verifica que tenga: texto@texto.texto
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
+/**
+ * Muestra un mensaje de error en el formulario
+ * @param {string} message - El mensaje de error a mostrar
+ */
 function showError(message) {
+    // Creamos un div para el mensaje de error
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message';
     errorDiv.textContent = message;
     
-    // Remove any existing error messages
+    // Eliminamos mensajes anteriores para no acumularlos
     removeMessages();
     
+    // Insertamos el mensaje antes del botón del formulario
     const form = document.getElementById('registerForm');
     form.insertBefore(errorDiv, form.querySelector('button'));
 
-    // Remove the message after 3 seconds
+    // Eliminamos el mensaje después de 3 segundos
     setTimeout(() => errorDiv.remove(), 3000);
 }
 
+/**
+ * Muestra un mensaje de éxito en el formulario
+ * @param {string} message - El mensaje de éxito a mostrar
+ */
 function showSuccess(message) {
+    // Creamos un div para el mensaje de éxito
     const successDiv = document.createElement('div');
     successDiv.className = 'success-message';
     successDiv.textContent = message;
     
-    // Remove any existing messages
+    // Eliminamos mensajes anteriores para no acumularlos
     removeMessages();
     
+    // Insertamos el mensaje antes del botón del formulario
     const form = document.getElementById('registerForm');
     form.insertBefore(successDiv, form.querySelector('button'));
 }
 
+/**
+ * Elimina todos los mensajes de error y éxito en el formulario
+ */
 function removeMessages() {
     document.querySelectorAll('.error-message, .success-message').forEach(el => el.remove());
 }
