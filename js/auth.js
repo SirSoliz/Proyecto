@@ -1,4 +1,6 @@
-// Verificar si el usuario está autenticado
+/**
+ * Verifica si el usuario está autenticado
+ */
 document.addEventListener('DOMContentLoaded', () => {
     checkAuth();
 });

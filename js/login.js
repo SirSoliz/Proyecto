@@ -1,4 +1,7 @@
-// Get registered users from localStorage
+/**
+ * Obtiene los usuarios registrados desde localStorage
+ * @returns {Array} Array de usuarios
+ */
 const getUsers = () => {
     return JSON.parse(localStorage.getItem('users') || '[]');
 };
@@ -14,14 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
 
-        // Basic validation
+        // Validación de campos
         if (!email || !password) {
-            showError('Please fill in all fields');
+            showError('Por favor, complete todos los campos');
             return;
         }
 
         if (!isValidEmail(email)) {
-            showError('Please enter a valid email address');
+            showError('Por favor, ingrese una dirección de correo electrónico válida');
             return;
         }
 
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sessionStorage.setItem('currentUser', JSON.stringify(userData));
                 localStorage.setItem('currentUser', JSON.stringify(userData));
                 
-                showSuccess('Login successful!');
+                showSuccess('¡Inicio de sesión exitoso!');
                 setTimeout(() => {
                     window.location.href = '/pages/barber_boss_site.html';
                 }, 1500);
@@ -48,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showError('Error al iniciar sesión');
             }
         } else {
-            showError('Invalid email or password');
+            showError('Correo o contraseña incorrectos');
         }
     });
 });
