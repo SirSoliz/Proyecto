@@ -151,7 +151,7 @@ sendWishlistBtn.addEventListener("click", function() {
   }
   // Construye la wishlist como texto plano para el correo
   let productosSeleccionados = 'Nombre del producto\t\t\t\tCantidad\n';
-  productosSeleccionados += '-------------------\t\t\t\tt--------\n';
+  productosSeleccionados += '-------------------\t\t\t\t--------\n';
   wishlist.forEach(p => {
     productosSeleccionados += `${p.nombre}\t\t${p.cantidad}\n`;
   });
