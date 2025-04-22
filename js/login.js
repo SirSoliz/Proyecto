@@ -35,8 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (user) {
             try {
                 // Success - Store user info in sessionStorage
+                // Guardamos el nombre bajo la clave 'usuario' para compatibilidad con wishlist y correos
                 const userData = {
-                    fullName: user.fullName,
+                    usuario: user.usuario,
                     email: user.email
                 };
                 sessionStorage.setItem('currentUser', JSON.stringify(userData));

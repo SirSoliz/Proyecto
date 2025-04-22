@@ -36,3 +36,18 @@ window.logout = function() {
         console.error('Error al cerrar sesión:', error);
     }
 };
+
+// Mostrar u ocultar el enlace "Lista de Deseos" según el estado de login
+// Usamos la clave 'currentUser' en localStorage para unificar la sesión en toda la app
+// (Asegúrate de guardar el usuario así al hacer login)
+document.addEventListener("DOMContentLoaded", function() {
+    const usuario = JSON.parse(localStorage.getItem('currentUser'));
+    const wishlistNav = document.getElementById('wishlist-link-nav');
+    if (wishlistNav) {
+        if (usuario && usuario.email) {
+            wishlistNav.style.display = '';
+        } else {
+            wishlistNav.style.display = 'none';
+        }
+    }
+});

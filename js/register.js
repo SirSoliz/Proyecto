@@ -36,8 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // NOTA: En una aplicación real, esto se enviaría a un servidor backend
         // Por ahora, solo simulamos el registro para el proyecto de la U
+        // Guardamos el nombre bajo la clave 'usuario' para compatibilidad con wishlist y correos
         const newUser = {
-            fullName,
+            usuario: fullName,
             email,
             password
         };
