@@ -1,109 +1,3 @@
-// --- DIAL PICKER HORIZONTAL MODERNO CON ANIMACIÓN Y VALIDACIONES ---
-class DialDate {
-    #year = [];
-    #month = 1;
-    #day = 1;
-    #currentDate;
-    #dateDisplay;
-    #picker;
-    #svg;
-    #config = {
-        day:   { min: 1, max: 31, r: 110, cx: 140,  cy: 110, label: 'Día' },
-        month: { min: 1, max: 12, r: 75, cx: 340, cy: 110, label: 'Mes' },
-        year:  { min: new Date().getFullYear(), max: new Date().getFullYear() + 4, r: 50, cx: 520, cy: 110, label: 'Año' }
-    };
-    constructor() {
-        this.#currentDate = new Date();
-        this.#dateDisplay = document.querySelector('.date-display');
-        this.#picker = document.getElementById('picker');
-        this.#svg = this.#picker.querySelector('svg');
-        this.#initValues();
-        this.#drawDials();
-        this.#updateDisplay();
-    }
-    #initValues() {
-        this.#year = [this.#currentDate.getFullYear()];
-        this.#month = this.#currentDate.getMonth() + 1;
-        this.#day = this.#currentDate.getDate();
-    }
-    #drawDials() {
-        console.log('Dibujando diales...')
-        this.#svg.innerHTML = '';
-        // Dibuja los círculos primero
-        ['day','month','year'].forEach((type) => {
-            const conf = this.#config[type];
-            const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-            circle.setAttribute('cx', conf.cx);
-            circle.setAttribute('cy', conf.cy);
-            circle.setAttribute('r', conf.r);
-            circle.setAttribute('stroke', '#ffc107');
-            circle.setAttribute('stroke-width', '3');
-            circle.setAttribute('fill', '#232323');
-            circle.setAttribute('class', 'dial-circle');
-            this.#svg.appendChild(circle);
-        });
-        // Ahora los números y etiquetas
-        ['day','month','year'].forEach((type) => {
-            const conf = this.#config[type];
-            const total = conf.max - conf.min + 1;
-            for(let i=conf.min; i<=conf.max; i++){
-                const idx = i - conf.min;
-                // Distribución especial para pocos valores
-                let angle;
-                if (total === 2) {
-                    angle = (idx === 0 ? -Math.PI/3 : Math.PI/3);
-                } else if (total === 3) {
-                    angle = (idx-1) * (Math.PI/3); // -60°, 0°, 60°
-                } else {
-                    angle = (idx / total) * 2 * Math.PI - Math.PI/2;
-                }
-                const x = conf.cx + Math.cos(angle) * (conf.r - 10);
-                const y = conf.cy + Math.sin(angle) * (conf.r - 10) + 5;
-                const text = document.createElementNS('http://www.w3.org/2000/svg','text');
-                text.setAttribute('x', x);
-                text.setAttribute('y', y);
-                text.setAttribute('text-anchor', 'middle');
-                text.setAttribute('class', `dial-value dial-value-${type}` + (this.#getValue(type) === i ? ' selected animate' : ''));
-                text.setAttribute('data-value', i);
-                text.style.cursor = 'pointer';
-                text.textContent = i;
-                text.addEventListener('click', () => {
-                    this.#setValue(type, i);
-                    this.#drawDials();
-                    this.#updateDisplay();
-                });
-                this.#svg.appendChild(text);
-            }
-            // Etiqueta
-            const label = document.createElementNS('http://www.w3.org/2000/svg','text');
-            label.setAttribute('x', conf.cx);
-            label.setAttribute('y', conf.cy + conf.r + 18);
-            label.setAttribute('text-anchor', 'middle');
-            label.setAttribute('class', 'label');
-            label.textContent = conf.label;
-            this.#svg.appendChild(label);
-        });
-    }
-    #getValue(type) {
-        if(type === 'day') return this.#day;
-        if(type === 'month') return this.#month;
-        if(type === 'year') return this.#year[0];
-    }
-    #setValue(type, value) {
-        if(type === 'day') this.#day = value;
-        if(type === 'month') this.#month = value;
-        if(type === 'year') this.#year = [value];
-    }
-    #updateDisplay() {
-        if(this.#dateDisplay) {
-            this.#dateDisplay.textContent = `${this.#day.toString().padStart(2,'0')}/${this.#month.toString().padStart(2,'0')}/${this.#year[0]}`;
-        }
-    }
-    getSelectedDate() {
-        return new Date(this.#year[0], this.#month-1, this.#day);
-    }
-}
-
 // --- Date Picker tipo rueda personalizado ---
 document.addEventListener('DOMContentLoaded', () => {
     // Configuración de rangos
@@ -115,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const wheelDay = document.getElementById('wheel-day');
     const wheelMonth = document.getElementById('wheel-month');
     const wheelYear = document.getElementById('wheel-year');
-    const dateDisplay = document.querySelector('.date-display');
     const fechaInput = document.getElementById('fechaSeleccionada');
     const pickerSelectedLabel = document.getElementById('picker-selected-label');
 
@@ -149,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderWheel(wheelYear, Array.from({length:maxYear-minYear+1},(_,i)=>minYear+i), selectedYear, 'year');
         // Actualiza display
         const fechaStr = `${selectedDay.toString().padStart(2,'0')}/${selectedMonth.toString().padStart(2,'0')}/${selectedYear}`;
-        if(dateDisplay) dateDisplay.textContent = fechaStr;
         if(fechaInput) fechaInput.value = fechaStr;
         if(pickerSelectedLabel) pickerSelectedLabel.textContent = 'Fecha seleccionada: ' + fechaStr;
         // Animación
@@ -215,14 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- VALIDACIONES Y ENVÍO ---
 document.addEventListener('DOMContentLoaded',()=>{
-    const dialDate = new DialDate();
     // Manejar el envío del formulario
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
     if(!contactForm) return;
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const selectedDate = dialDate.getSelectedDate();
         const hora = contactForm.hora.value;
         const nombre = contactForm.nombre.value.trim();
         const email = contactForm.email.value.trim();
@@ -248,7 +138,11 @@ document.addEventListener('DOMContentLoaded',()=>{
             formMessage.style.color = '#dc3545';
             return;
         }
-        // Validar que la fecha no sea anterior a hoy
+        // Validar días válidos del mes
+        const fechaInput = document.getElementById('fechaSeleccionada');
+        const fechaStr = fechaInput.value;
+        const [day, month, year] = fechaStr.split('/').map(Number);
+        const selectedDate = new Date(year, month-1, day);
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         if (selectedDate < today) {
@@ -256,7 +150,6 @@ document.addEventListener('DOMContentLoaded',()=>{
             formMessage.style.color = '#dc3545';
             return;
         }
-        // Validar días válidos del mes
         const maxDay = new Date(selectedDate.getFullYear(), selectedDate.getMonth()+1, 0).getDate();
         if(selectedDate.getDate() > maxDay){
             formMessage.textContent = 'El día seleccionado no es válido para el mes/año elegido.';
