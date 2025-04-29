@@ -196,4 +196,85 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    // ========== ENVÍO DE EMAIL AL RESERVAR CITA ==========
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            // Obtener datos del formulario
+            const fecha = document.getElementById('fechaSeleccionada').value;
+            const hora = contactForm.elements['hora'].value;
+            const nombre = contactForm.elements['nombre'].value;
+            const email = contactForm.elements['email'].value;
+            const servicio = contactForm.elements['servicio'].value;
+            const mensaje = contactForm.elements['mensaje'].value;
+
+            // Validaciones básicas
+            if (!fecha || !hora || !nombre || !email || !servicio) {
+                formMessage.textContent = 'Por favor completa todos los campos obligatorios.';
+                formMessage.style.color = '#dc3545';
+                return;
+            }
+
+            // Validar formato de email
+            const emailRegex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+            if (!emailRegex.test(email)) {
+                formMessage.textContent = 'Por favor ingresa un correo electrónico válido.';
+                formMessage.style.color = '#dc3545';
+                return;
+            }
+
+            // Validar horario de atención (9 AM a 7 PM)
+            const [hours, minutes] = hora.split(':').map(Number);
+            if (hours < 9 || hours >= 19) {
+                formMessage.textContent = 'Por favor selecciona un horario entre 9:00 AM y 7:00 PM';
+                formMessage.style.color = '#dc3545';
+                return;
+            }
+
+            // Validar minutos: solo 00 o 30 permitidos
+            if (!(minutes === 0 || minutes === 30)) {
+                formMessage.textContent = 'Solo puedes seleccionar horas en punto o medias horas (ej: 09:00, 09:30, 10:00, 10:30, etc).';
+                formMessage.style.color = '#dc3545';
+                return;
+            }
+
+            // Validar fecha futura
+            const [year, month, day] = fecha.split('-').map(Number);
+            const selectedDate = new Date(year, month - 1, day);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (selectedDate < today) {
+                formMessage.textContent = 'Por favor selecciona una fecha futura.';
+                formMessage.style.color = '#dc3545';
+                return;
+            }
+
+            try {
+                // Prepara los parámetros para EmailJS
+                const templateParams = {
+                    fecha: fecha,
+                    hora: hora,
+                    nombre: nombre,
+                    email: email,
+                    servicio: servicio,
+                    mensaje: mensaje
+                   
+                };
+                emailjs.init('2p9vFbazapEtsaXQ_');
+                // Envía el correo usando EmailJS
+                await emailjs.send('service_5f5w65s', 'template_ge0max5', templateParams);
+                formMessage.textContent = '¡Cita reservada con éxito! Te enviaremos un correo de confirmación.';
+                formMessage.style.color = '#28a745';
+                contactForm.reset();
+            } catch (error) {
+                console.error('EmailJS error:', error);
+                formMessage.textContent = 'Hubo un error al reservar la cita. Por favor intenta de nuevo.';
+                formMessage.style.color = '#dc3545';
+            }
+        });
+    }
 });
