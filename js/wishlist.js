@@ -31,6 +31,18 @@ const productos = [
     nombre: "Aftershave",
     descripcion: "Calma y refresca la piel.",
     imagen: "../Images/wishList/aftershave.png"
+  },
+  {
+    id: 6,
+    nombre: "Minoxidil 5%",
+    descripcion: "Estimula el crecimiento capilar y de barba.",
+    imagen: "../Images/wishList/minoxidil.png"
+  },
+  {
+    id: 7,
+    nombre: "Maquina de Afeitar Electrica",
+    descripcion: "Afeitado rápido y cómodo, recargable.",
+    imagen: "../Images/wishList/maquina-afeitar.png"
   }
 ];
 
