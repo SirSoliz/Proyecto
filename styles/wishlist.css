@@ -18,11 +18,37 @@
   max-width: 320px;
 }
 
+/* Ajuste definitivo: calcula el alto real del navbar y aplica ese valor más un margen visual */
+main.container {
+  padding-top: 600px !important; /* Igual o mayor al alto del navbar */
+}
+
+/* Mejoras de accesibilidad visual */
+#wishlistMessage {
+  font-size: 1.1rem;
+  min-height: 2em;
+}
+.navbar.fixed-top {
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
+  /* Opcional: para centrar verticalmente los elementos */
+  display: flex;
+  align-items: center;
+}
+
+.navbar.fixed-top .navbar-brand,
+.navbar.fixed-top .nav-link {
+  line-height: 80px;
+  height: 80px;
+}
+
 /* Espaciado en móviles */
 @media (max-width: 600px) {
   main.container {
-    padding: 100px 0.5rem 1rem 0.5rem;
+    padding: 0 0.5rem 1rem 0.5rem;
     max-width: 100vw !important;
+    padding-top: 90px !important;
   }
   #productsGrid {
     gap: 1rem 0.25rem;
@@ -44,14 +70,4 @@
     font-size: 1rem;
     padding: 0.75rem;
   }
-}
-
-main.container {
-  padding-top: 110px !important;
-}
-
-/* Mejoras de accesibilidad visual */
-#wishlistMessage {
-  font-size: 1.1rem;
-  min-height: 2em;
 }
