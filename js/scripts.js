@@ -5,19 +5,132 @@ AOS.init({
     once: true
 });
 
+// Funciones de autenticación
+// Función para verificar si el usuario está logueado
+function isUserLoggedIn() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser') || 'null');
+    return !!currentUser;
+}
+
+// Función para obtener el nombre del usuario
+function getUserName() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser') || 'null');
+    return currentUser ? currentUser.usuario : '';
+}
+
+// Función para actualizar la interfaz según el estado de sesión
+function updateAuthUI() {
+    const loginButton = document.getElementById('loginButton');
+    const userNameSpan = document.getElementById('userName');
+    const logoutButton = document.querySelector('.logout-btn');
+    
+    if (!loginButton || !userNameSpan || !logoutButton) {
+        console.error('Elementos de autenticación no encontrados');
+        return;
+    }
+    
+    const isLoggedIn = isUserLoggedIn();
+    const userName = getUserName();
+    
+    console.log('Estado de sesión:', { isLoggedIn, userName });
+    
+    if (isLoggedIn && userName) {
+        // Usuario logueado: mostrar nombre y botón de logout
+        loginButton.classList.add('d-none');
+        userNameSpan.classList.remove('d-none');
+        logoutButton.classList.remove('d-none');
+        userNameSpan.textContent = userName;
+    } else {
+        // Usuario no logueado: mostrar botón de inicio de sesión
+        loginButton.classList.remove('d-none');
+        userNameSpan.classList.add('d-none');
+        logoutButton.classList.add('d-none');
+    }
+}
+
 // Función para cerrar sesión
 function logout() {
-    // Eliminar cookies
+    // Eliminar datos de sesión de localStorage y sessionStorage
+    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
+    
+    // Limpiar todas las cookies
     document.cookie.split(";").forEach(function(c) {
         document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
     });
-    // Limpiar localStorage
+    
+    // Limpiar el resto de localStorage
     localStorage.clear();
-    // Redirigir a la página de inicio
-    window.location.href = 'index.html';
+    sessionStorage.clear();
+    
+    // Actualizar la interfaz inmediatamente
+    updateAuthUI();
+    
+    // Redirigir a la página principal después de un breve delay
+    setTimeout(() => {
+        window.location.href = '/pages/barber_boss_site.html';
+    }, 500);
+}
+
+// Función para obtener una cookie específica
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return '';
+}
+
+// Función para establecer una cookie
+function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+// Funciones de manejo de cookies
+function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days*24*60*60*1000));
+    const expires = "expires=" + d.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+}
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return '';
+}
+
+// Función para cerrar sesión
+function logout() {
+    // Eliminar datos de sesión de localStorage y sessionStorage
+    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
+    
+    // Limpiar todas las cookies
+    document.cookie.split(";").forEach(function(c) {
+        document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
+    
+    // Limpiar el resto de localStorage
+    localStorage.clear();
+    sessionStorage.clear();
+    
+    // Actualizar la interfaz inmediatamente
+    updateAuthUI();
+    
+    // Redirigir a la página principal después de un breve delay
+    setTimeout(() => {
+        window.location.href = '/pages/barber_boss_site.html';
+    }, 500);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Actualizar la interfaz al cargar la página
+    updateAuthUI();
+    
     // 1. SISTEMA DE PESTAÑAS MEJORADO
     function switchTab(tabId) {
         // Ocultar todos los contenidos de pestañas
@@ -161,12 +274,31 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Asignar también el evento por JS (buena práctica)
     document.querySelector('.logout-btn')?.addEventListener('click', logout);
-    // Recuperar el nombre desde las cookies
-    let userName = getCookie('userName');
-    if (userName) {
-        alert(`Bienvenido de nuevo, ${userName}!`);
-        const nameInput = document.getElementById('name');
-        if (nameInput) nameInput.value = userName;
+
+    // Manejar el botón de inicio de sesión y el nombre del usuario
+    const loginButton = document.getElementById('loginButton');
+    const userNameSpan = document.getElementById('userName');
+    const logoutButton = document.querySelector('.logout-btn');
+    
+    // Evento para el botón de inicio de sesión
+    if (loginButton) {
+        loginButton.addEventListener('click', function() {
+            window.location.href = '/login.html';
+        });
+    }
+    
+    // Evento para el botón de logout
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function() {
+            // Eliminar tanto cookie como localStorage
+            document.cookie.split(";").forEach(function(c) {
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+            localStorage.clear();
+            
+            logout();
+            updateAuthUI(); // Actualizar la interfaz después del logout
+        });
     }
 
     // 3. FORMULARIO DE CONTACTO

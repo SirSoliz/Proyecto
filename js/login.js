@@ -34,6 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (user) {
             try {
+                // Mostrar mensaje de éxito
+                const successDiv = document.createElement('div');
+                successDiv.className = 'success-message';
+                successDiv.textContent = '¡Inicio de sesión exitosa!';
+                
+                // Insertar el mensaje de éxito
+                loginForm.insertBefore(successDiv, loginForm.querySelector('button'));
+                
+                // Limpiar el mensaje después de 3 segundos
+                setTimeout(() => successDiv.remove(), 3000);
                 // Success - Store user info in sessionStorage
                 // Guardamos el nombre bajo la clave 'usuario' para compatibilidad con wishlist y correos
                 const userData = {
@@ -52,7 +62,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 showError('Error al iniciar sesión');
             }
         } else {
-            showError('Correo o contraseña incorrectos');
+            // Mostrar mensaje de error
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = 'Correo o contraseña incorrectos';
+            
+            // Insertar el mensaje de error
+            loginForm.insertBefore(errorDiv, loginForm.querySelector('button'));
+            
+            // Limpiar el mensaje después de 3 segundos
+            setTimeout(() => errorDiv.remove(), 3000);
         }
     });
 });
