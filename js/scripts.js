@@ -48,6 +48,81 @@ document.addEventListener('DOMContentLoaded', function () {
         AOS.refresh();
     }
 
+    // 2. VALIDACIÓN DE FECHA PARA RESERVAS
+    function validarFecha() {
+        const fechaSeleccionada = document.getElementById('fechaSeleccionada').value;
+        if (!fechaSeleccionada) return false;
+
+        // Obtener fecha actual y sumarle 12 horas
+        const fechaMinima = new Date();
+        fechaMinima.setHours(fechaMinima.getHours() + 12);
+        
+        // Convertir la fecha seleccionada a objeto Date
+        const fechaSeleccionadaObj = new Date(fechaSeleccionada);
+        
+        // Validar que la fecha seleccionada sea al menos 12 horas después
+        if (fechaSeleccionadaObj < fechaMinima) {
+            formMessage.textContent = 'Error: La fecha debe ser al menos 12 horas después de la hora actual.';
+            return false;
+        }
+        
+        return true;
+    }
+
+    // 3. ENVÍO DE FORMULARIO DE RESERVA
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Validar fecha
+            const fechaSeleccionada = document.getElementById('fechaSeleccionada').value;
+            if (!fechaSeleccionada) {
+                formMessage.textContent = 'Por favor selecciona una fecha.';
+                formMessage.style.color = '#dc3545';
+                return;
+            }
+
+            // Obtener fecha actual y sumarle 12 horas
+            const fechaMinima = new Date();
+            fechaMinima.setHours(fechaMinima.getHours() + 12);
+            
+            // Convertir la fecha seleccionada a objeto Date
+            const fechaSeleccionadaObj = new Date(fechaSeleccionada);
+            
+            // Validar que la fecha seleccionada sea al menos 12 horas después
+            if (fechaSeleccionadaObj < fechaMinima) {
+                formMessage.textContent = 'Error: La fecha debe ser al menos 12 horas después de la hora actual.';
+                formMessage.style.color = '#dc3545';
+                return;
+            }
+
+            // Inicializar EmailJS
+            emailjs.init("YOUR_PUBLIC_KEY");
+
+            // Enviar correo
+            emailjs.send(
+                "YOUR_SERVICE_ID",
+                "YOUR_TEMPLATE_ID",
+                {
+                    to_email: data.email,
+                    from_name: "Barber Boss",
+                    message: `Hola ${data.nombre},\n\nGracias por tu reserva en Barber Boss.\n\nDetalles de tu cita:\nFecha: ${data.fecha}\nHora: ${data.hora}\nServicio: ${data.servicio}\n\n${data.mensaje ? 'Mensaje adicional:\n' + data.mensaje : ''}\n\nPor favor, llega 15 minutos antes de tu cita.\n\nAtentamente,\nBarber Boss`,
+                }
+            ).then(
+                function(response) {
+                    formMessage.textContent = '¡Reserva exitosa! Te hemos enviado los detalles a tu correo.';
+                    contactForm.reset();
+                },
+                function(error) {
+                    formMessage.textContent = 'Error al enviar la reserva. Por favor, intenta nuevamente.';
+                }
+            );
+        });
+    }
+
     // Agregar event listeners a los botones de navegación
     document.querySelectorAll('[data-tab]').forEach(button => {
         button.addEventListener('click', function(e) {
@@ -197,10 +272,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ========== ENVÍO DE EMAIL AL RESERVAR CITA ==========
-    const contactForm = document.getElementById('contactForm');
-    const formMessage = document.getElementById('formMessage');
-
+    // 3. ENVÍO DE FORMULARIO DE RESERVA Y EMAIL
     if (contactForm) {
         contactForm.addEventListener('submit', async function(event) {
             event.preventDefault();

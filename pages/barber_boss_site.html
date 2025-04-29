@@ -23,7 +23,8 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" id="logoLink" data-tab="home">Barber Boss</a>
+                <a class="navbar-brand" href="#" id="logoLink"></a>
+                <img src="../Images/Logo Barberia/Logo.png" alt="Barber Boss" style="height: 40px;" data-tab="home">
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTabs">
                     <span class="navbar-toggler-icon"></span>
@@ -38,7 +39,7 @@
                             <a class="nav-link tab-button" href="#" data-tab="tab2">Precios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link tab-button" href="#" data-tab="tab3">Contacto</a>
+                            <a class="nav-link tab-button" href="#" data-tab="tab3">Reserva</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link tab-button" href="wishlist.html">Lista de Deseos</a>
@@ -68,28 +69,22 @@
                         <!-- Slide 1 -->
                         <div class="carousel-item active">
                             <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
-                                <img src="../Images/Carousel/1645218437_195_125-Best-Haircuts-For-Men-2022-Cuts-Styles.jpg"
-                                    class="img-fluid responsive-img" style="max-height: 100%; width: auto;" alt="Imagen 1"
-                                    srcset="../Images/Carousel/1645218437_195_125-Best-Haircuts-For-Men-2022-Cuts-Styles.jpg 600w, ../Images/Carousel/1645218437_195_125-Best-Haircuts-For-Men-2022-Cuts-Styles.jpg 1200w"
-                                    sizes="(max-width: 600px) 100vw, 600px">
+                                <img src="../Images/Carousel/corteFadeIn.jpg"
+                                    class="img-fluid" style="max-height: 100%; width: auto;" alt="Imagen 1">
                             </div>
                         </div>
                         <!-- Slide 2 -->
                         <div class="carousel-item">
                             <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
-                                <img src="../Images/Carousel/b1f74e9c9522f23c9918a3b69d08b0b9.jpg" class="img-fluid responsive-img"
-                                    style="max-height: 100%; width: auto;" alt="Imagen 2"
-                                    srcset="../Images/Carousel/b1f74e9c9522f23c9918a3b69d08b0b9.jpg 600w, ../Images/Carousel/b1f74e9c9522f23c9918a3b69d08b0b9.jpg 1200w"
-                                    sizes="(max-width: 600px) 100vw, 600px">
+                                <img src="../Images/Carousel/corteniño.jpg" class="img-fluid"
+                                    style="max-height: 100%; width: auto;" alt="Imagen 2">
                             </div>
                         </div>
                         <!-- Slide 3 -->
                         <div class="carousel-item">
                             <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
-                                <img src="../Images/Carousel/corte-de-pelo-desvanecido-377x566.jpg" class="img-fluid responsive-img"
-                                    style="max-height: 100%; width: auto;" alt="Imagen 3"
-                                    srcset="../Images/Carousel/corte-de-pelo-desvanecido-377x566.jpg 377w, ../Images/Carousel/corte-de-pelo-desvanecido-377x566.jpg 566w"
-                                    sizes="(max-width: 600px) 90vw, 377px">
+                                <img src="../Images/Carousel/corteSombreadojpg.jpg" class="img-fluid"
+                                    style="max-height: 100%; width: auto;" alt="Imagen 3">
                             </div>
                         </div>
                     </div>
@@ -146,18 +141,18 @@
             <div id="tab2" class="tab-content">
                 <h2>Nuestros Precios</h2>
                 <ul class="list-group">
-                    <li class="list-group-item bg-dark text-warning">Corte de cabello: 5000</li>
-                    <li class="list-group-item bg-dark text-warning">Afeitado clásico: 2000</li>
-                    <li class="list-group-item bg-dark text-warning">Arreglo de cejas: 1000</li>
-                    <li class="list-group-item bg-dark text-warning">Marcado de corte: 1500</li>
-                    <li class="list-group-item bg-dark text-warning">Productos para el cabello: Desde 2000</li>
-                    <li class="list-group-item bg-dark text-warning">Productos para la barba: Desde 2500</li>
+                    <li class="list-group-item bg-dark text-warning">Corte de cabello: ₡5000</li>
+                    <li class="list-group-item bg-dark text-warning">Afeitado clásico: ₡3000</li>
+                    <li class="list-group-item bg-dark text-warning">Arreglo de cejas: ₡2000</li>
+                    <li class="list-group-item bg-dark text-warning">Marcado de corte: ₡1500</li>
+                    <li class="list-group-item bg-dark text-warning">Productos para el cabello: Desde ₡2000</li>
+                    <li class="list-group-item bg-dark text-warning">Productos para la barba: Desde ₡2500</li>
                 </ul>
             </div>
 
             <!-- Pestaña Contacto -->
             <div id="tab3" class="tab-content">
-                <h2>Contacto</h2>
+                <h2>Reserva</h2>
                 <form id="contactForm">
                     <div class="mb-3">
                         <label class="form-label text-warning">Selecciona fecha y hora para tu cita</label>
@@ -167,8 +162,32 @@
                             <div class="wheel" id="wheel-year"></div>
                         </div>
                         <div id="picker-selected-label" class="picker-selected-label"></div>
-                        <input type="hidden" name="fecha" id="fechaSeleccionada">
-                        <input type="time" class="form-control bg-secondary text-white mt-3" name="hora" required step="1800">
+                        <input type="hidden" name="fecha" id="fechaSeleccionada" min="" required>
+                        <small class="text-warning">* La fecha debe ser al menos 12 horas después de la hora actual</small>
+                        <select class="form-select bg-secondary text-white mt-3" name="hora" required>
+                            <option value="">Selecciona la hora</option>
+                            <option value="9:00">9:00 AM</option>
+                            <option value="9:30">9:30 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="10:30">10:30 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="11:30">11:30 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="12:30">12:30 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="13:30">1:30 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="14:30">2:30 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="15:30">3:30 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                            <option value="16:30">4:30 PM</option>
+                            <option value="17:00">5:00 PM</option>
+                            <option value="17:30">5:30 PM</option>
+                            <option value="18:00">6:00 PM</option>
+                            <option value="18:30">6:30 PM</option>
+                            <option value="19:00">7:00 PM</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <input type="text" class="form-control bg-secondary text-white" name="nombre" placeholder="Nombre" required>

@@ -14,20 +14,27 @@
 <body class="bg-light">
   <!-- NAVBAR FIJO Y OSCURO -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
-  <div class="container">
-    <a class="navbar-brand" href="#">Barber Boss</a>
+  <div class="container-fluid">
+    <a href="barber_boss_site.html" class="navbar-brand" data-tab="home">
+    <img src="../Images/Logo Barberia/Logo.png" alt="Barber Boss" style="height: 40px;">
+</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse justify-content-between" id="navbarTabs">
       <ul class="navbar-nav mx-auto">
-        <li class="nav-item"><a class="nav-link" href="barber_boss_site.html#home">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="barber_boss_site.html#about">Acerca</a></li>
-        <li class="nav-item"><a class="nav-link" href="barber_boss_site.html#services">Servicios</a></li>
-        <li class="nav-item"><a class="nav-link" href="barber_boss_site.html#gallery">Galería</a></li>
-        <li class="nav-item"><a class="nav-link" href="barber_boss_site.html#contact">Contacto</a></li>
-        <li class="nav-item"><a class="nav-link" href="barber_boss_site.html#location">Ubicación</a></li>
-        <li class="nav-item" id="wishlist-link-nav"><a class="nav-link active" href="wishlist.html">Lista de Deseos</a></li>
+          <li class="nav-item">
+              <a class="nav-link tab-button" href="barber_boss_site.html#tab1">Servicios</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link tab-button" href="barber_boss_site.html#tab2">Precios</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link tab-button" href="barber_boss_site.html#tab3">Reserva</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link tab-button active" href="wishlist.html">Lista de Deseos</a>
+          </li>
       </ul>
       <span class="navbar-text me-2" id="userName"></span>
       <button type="button" class="btn btn-outline-light btn-sm" onclick="logout()" title="Cerrar sesión">
@@ -36,9 +43,11 @@
     </div>
   </div>
 </nav>
-<div style="height: 800px;"></div> <!-- Ajusta este valor según el alto real de tu navbar -->
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="container py-5 mt-5" style="max-width: 900px;">
+<!-- Ajuste para navbar fijo -->
+<div style="height: 80px;"></div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="container py-4 mt-4" style="max-width: 900px;">
     <h2 class="text-center mb-4">Lista de Deseos de Productos de Barbería</h2>
     <!--Texto de instrucciones para la lista de deseos-->
     <div class="alert alert-info mb-4" role="alert">

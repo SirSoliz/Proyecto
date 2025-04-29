@@ -1,5 +1,23 @@
 /* Estilos responsivos para la wishlist */
-
+body{
+  font-family: 'Arial', sans-serif;
+  padding-top: 70px; /* Para navbar fijo */
+  background-color: #000; /* Fondo negro */
+  color: #CDA434; /* Texto dorado */
+}
+.user-section {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: rgba(33, 37, 41, 0.9);
+  padding: 8px 15px;
+  border-radius: 25px;
+  color: white;
+}
 /* Ajustes generales */
 #wishlist {
   max-width: 600px;
@@ -42,7 +60,47 @@ main.container {
   line-height: 80px;
   height: 80px;
 }
-
+.nav-link.tab-button {
+  cursor: pointer;
+  margin: 0 5px;
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  color: #CDA434;
+  background-color: #222;
+  border-radius: 5px;
+}
+.nav-link.tab-button.active {
+  background-color: #CDA434 !important;
+  color: #000 !important;
+  border-color: #CDA434;
+  font-weight: bold;
+  color: #000 !important;
+}
+.nav-link.tab-button:hover:not(.active) {
+  background-color: #555;
+  color: #FFF;
+}
+.navbar-brand {
+  font-weight: bold;
+  color: #CDA434 !important;
+  font-size: 24px;
+}
+.tab-content {
+  display: none;
+  padding: 20px;
+  background-color: #333;
+  color: #CDA434;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+.tab-content.active {
+  display: block;
+  opacity: 1;
+  animation: fadeIn 0.5s ease-in-out;
+}
 /* Espaciado en móviles */
 @media (max-width: 600px) {
   main.container {
