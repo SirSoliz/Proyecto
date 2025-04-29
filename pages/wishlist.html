@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lista de Deseos de Barbería</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tu CSS personalizado si lo necesitas -->
+  <link rel="stylesheet" href="../styles/login-style.css" />
+  <link rel="stylesheet" href="../styles/wishlist.css" />
+</head>
+
+<body class="bg-light">
+  <!-- NAVBAR FIJO Y OSCURO -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="barber_boss_site.html" id="logoLink">Barber Boss</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarTabs">
+      <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+              <a class="nav-link tab-button " href="#" data-tab="tab1">Servicios</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link tab-button" href="#" data-tab="tab2">Precios</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link tab-button" href="#" data-tab="tab3">Contacto</a>
+          </li>
+          <li class="nav-item" id="wishlist-link-nav">
+              <a class="nav-link active" href="wishlist.html">Lista de Deseos</a>
+          </li>
+      </ul>
+      <span class="navbar-text me-2" id="userName"></span>
+      <button type="button" class="btn btn-outline-light btn-sm" onclick="logout()" title="Cerrar sesión">
+        <span class="material-icons" aria-hidden="true">logout</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div style="height: 800px;"></div> <!-- Ajusta este valor según el alto real de tu navbar -->
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container py-5 mt-5" style="max-width: 900px;">
+    <h2 class="text-center mb-4">Lista de Deseos de Productos de Barbería</h2>
+    <!--Texto de instrucciones para la lista de deseos-->
+    <div class="alert alert-info mb-4" role="alert">
+      <strong>Bienvenido a tu página lista de deseos.</strong><br>
+      Acá podrás encontrar productos que puedes pasar a retirar en la tienda. Nosotros nos encargamos de alistar tu pedido.<br><br>
+      <strong>Instrucciones:</strong> Siendo usuario de nuestra página web contás con este beneficio, selecciona los artículos y cantidades que deseas retirar de la tienda y da click en el botón enviar. Este pedido llegará a tu correo y con el mismo podrás pasar a nuestra tienda a retirar.<br><br>
+      Cualquier duda puedes contactarnos por nuestros canales oficiales de comunicación.
+    </div>
+    <!-- Cuadrícula de productos -->
+    <div id="productsGrid" class="row g-4 justify-content-center">
+      <!-- Los productos se generan dinámicamente con JS -->
+    </div>
+    <!-- Lista de productos seleccionados -->
+    <div class="mt-5">
+      <h4 class="text-center">Tu selección:</h4>
+      <ul id="wishlist" class="list-group mb-3"></ul>
+      <div class="d-flex justify-content-center">
+        <button id="sendWishlist" class="btn btn-warning" disabled>Enviar lista de deseos a mi correo</button>
+      </div>
+      <div id="wishlistMessage" class="mt-3 text-center"></div>
+    </div>
+  </main>
+
+
+  <!-- Bootstrap JS y dependencias -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <!-- Auth y Wishlist logic -->
+  <script src="../js/auth.js"></script>
+  <script src="../js/wishlist.js"></script>
+
+  
+</body>
+</html>

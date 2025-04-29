@@ -1,0 +1,94 @@
+/* --- Picker Wheel Styles --- */
+.picker-wheel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+}
+.wheel {
+    width: 90px;
+    height: 180px;
+    overflow-y: scroll;
+    background: #181818;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #ffc107 #232323;
+}
+.wheel::-webkit-scrollbar {
+    width: 7px;
+    background: #232323;
+}
+.wheel::-webkit-scrollbar-thumb {
+    background: #ffc107;
+    border-radius: 10px;
+}
+.wheel-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    transition: transform 0.35s cubic-bezier(.4,2,.6,1);
+}
+.wheel-item {
+    height: 36px;
+    line-height: 36px;
+    font-size: 18px;
+    color: #ffc107;
+    background: none;
+    transition: background 0.2s, color 0.2s, font-size 0.2s, transform 0.3s cubic-bezier(.4,2,.6,1);
+    cursor: pointer;
+    user-select: none;
+}
+.wheel-item.selected {
+    color: #232323;
+    background: #ffc107;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 8px;
+    box-shadow: 0 0 8px #ffc10799;
+    transform: scale(1.2) rotate(-4deg);
+    z-index: 2;
+}
+.wheel-item.animate {
+    animation: bounce 0.4s cubic-bezier(.4,2,.6,1);
+}
+@keyframes bounce {
+    0% { transform: scale(1.2) rotate(-4deg); }
+    40% { transform: scale(1.35) rotate(3deg); }
+    60% { transform: scale(1.1) rotate(-2deg); }
+    100% { transform: scale(1.2) rotate(-4deg); }
+}
+
+.wheel-item:hover {
+    background: #ffe082;
+    color: #232323;
+}
+.picker-wheel-container::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    left: 0; right: 0; top: 50%;
+    height: 36px;
+    margin-top: -18px;
+    border-top: 2px solid #ffc107;
+    border-bottom: 2px solid #ffc107;
+    opacity: 0.25;
+    z-index: 2;
+}
+.picker-selected-label {
+    margin-top: 16px;
+    text-align: center;
+    color: #fffbe7;
+    background: #232323;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: bold;
+    padding: 8px 0 6px 0;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border: 1px solid #ffc10744;
+}

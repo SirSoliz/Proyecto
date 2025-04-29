@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Usuario - Barber Boss</title>
+    <!-- Estilos CSS para el formulario de registro -->
+    <link rel="stylesheet" href="../styles/login-style.css" />
+    <link rel="stylesheet" href="../css/login-messages.css" />
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
+    <!-- Elementos decorativos -->
+    <img src="../Images/Login images/blob.svg" class="blob" alt="Forma decorativa" />
+    <div class="orbit"></div>
+    
+    <!-- Formulario de registro -->
+    <div class="login">
+      <!-- Logo de candado en SVG: cuerpo dorado y arco plateado -->
+      <!-- Este SVG reemplaza el logo anterior para representar seguridad -->
+      <svg width="96" height="96" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 32px;">
+        <!-- Arco del candado (plateado) -->
+        <rect x="18" y="12" width="28" height="24" rx="14" fill="#B0B0B0" stroke="#888" stroke-width="2"/>
+        <!-- Cuerpo del candado (dorado) -->
+        <rect x="12" y="28" width="40" height="28" rx="6" fill="#CDA434" stroke="#B8932B" stroke-width="2"/>
+        <!-- Detalle del cilindro -->
+        <circle cx="32" cy="42" r="4" fill="#fff" stroke="#B8932B" stroke-width="2"/>
+        <!-- Línea del cilindro -->
+        <rect x="31" y="44" width="2" height="8" rx="1" fill="#B8932B"/>
+      </svg>
+      <h2>Crear Cuenta</h2>
+      <h3>¡Únete a Barber Boss hoy!</h3>
+      <form class="form" id="registerForm">
+        <!-- Campo: Nombre completo -->
+        <div class="textbox">
+          <input required type="text" id="fullName" />
+          <label>Nombre Completo</label>
+        </div>
+        <!-- Campo: Correo electrónico -->
+        <div class="textbox">
+          <input required type="email" id="email" />
+          <label>Correo Electrónico</label>
+        </div>
+        <!-- Campo: Contraseña -->
+        <div class="textbox">
+          <input required type="password" id="password" minlength="8"/>
+          <label>Contraseña</label>
+        </div>
+        <!-- Campo: Confirmar contraseña -->
+        <div class="textbox">
+          <input required type="password" id="confirmPassword" minlength="8"/>
+          <label>Confirmar Contraseña</label>
+        </div>
+        <button type="submit">Registrarse</button>
+      </form>
+      <p class="footer">¿Ya tienes una cuenta? <a href="../login.html">¡Inicia sesión!</a></p>
+    </div>
+    <!-- Script de funcionalidad del registro -->
+    <script src="../js/register.js"></script>
+  </body>
+</html>
